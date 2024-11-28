@@ -1,24 +1,24 @@
-const express = require('express');
-const cors = require('cors');
-const config = require('./config/config');
-const walletRoutes = require('./routes/walletRoutes');
-const errorMiddleware = require('./middleware/errorMiddleware');
-const requestLogger = require('./middleware/requestLogger');
+const express = require('express'); // Import the Express framework
+const cors = require('cors'); // Import CORS middleware for handling cross-origin requests
+const config = require('./config/config'); // Import configuration settings
+const walletRoutes = require('./routes/walletRoutes'); // Import wallet-related routes
+const errorMiddleware = require('./middleware/errorMiddleware'); // Import error handling middleware
+const requestLogger = require('./middleware/requestLogger'); // Import request logging middleware
 
-const app = express();
+const app = express(); // Create an Express application
 
 // Middleware
-app.use(cors());
-app.use(express.json());
-app.use(requestLogger);
+app.use(cors()); // Enable CORS for all routes
+app.use(express.json()); // Parse incoming JSON requests
+app.use(requestLogger); // Log incoming requests
 
 // Set view engine
-app.set('view engine', 'ejs');
-app.set('views', './src/views');
+app.set('view engine', 'ejs'); // Set EJS as the templating engine
+app.set('views', './src/views'); // Set the directory for view templates
 
 // Root route with API documentation
 app.get('/', (req, res) => {
-  const endpoints = [
+  const endpoints = [ // Define available API endpoints
     {
       path: '/api/wallet/:address/history',
       description: 'Get wallet transaction history'
@@ -51,28 +51,28 @@ app.get('/', (req, res) => {
       path: '/api/wallet/:address/pnl',
       description: 'Get wallet profit and loss'
     },
-
     {
       path: '/api/wallet/:address/domains',
       description: 'Get wallet domains'
     }
   ];
 
+  // Render the index view with API documentation
   res.render('index', { 
     endpoints,
-    version: '1.0.0',
-    description: 'API for retrieving wallet information using Moralis'
+    version: '1.0.0', // API version
+    description: 'API for retrieving wallet information using Moralis' // API description
   });
 });
 
 // API routes
-app.use('/api/wallet', walletRoutes);
+app.use('/api/wallet', walletRoutes); // Use wallet routes for API requests
 
 // Error handling middleware
-app.use(errorMiddleware);
+app.use(errorMiddleware); // Use error handling middleware
 
 // Start server
 app.listen(config.port, () => {
-  console.log(`Server is running on port ${config.port}`);
-  console.log(`Visit http://localhost:${config.port} for API documentation`);
+  console.log(`Server is running on port ${config.port}`); // Log server start message
+  console.log(`Visit http://localhost:${config.port} for API documentation`); // Log API documentation URL
 });

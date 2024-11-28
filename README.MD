@@ -46,7 +46,7 @@ To set up the project locally, follow these steps:
    ```
 
 5. **Open your browser**:
-   Navigate to `http://localhost:PORT` (replace `PORT` with the port number specified in your configuration).
+   Navigate to `http://localhost:3000` (replace `PORT` with the port number specified in your configuration).
 
 ## Usage
 
