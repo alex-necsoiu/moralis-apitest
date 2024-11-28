@@ -1,0 +1,190 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Moralis Wallet API Documentation</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+        <style>
+            .response-container {
+                max-width: 100%; /* Set a max width */
+                overflow-x: auto; /* Allow horizontal scrolling */
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <div class="min-h-screen">
+            <!-- Header -->
+            <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+                <div class="container mx-auto px-4">
+                    <h1 class="text-4xl font-bold mb-4">Moralis Wallet API</h1>
+                    <p class="text-xl opacity-90">Comprehensive wallet information retrieval API powered by Moralis</p>
+                    <div class="mt-4">
+                        <span class="inline-block bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold mr-2">Version 1.0.0</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="container mx-auto px-4 py-8">
+                <!-- Introduction -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold mb-4">Introduction</h2>
+                    <p class="text-gray-700">
+                        This API provides comprehensive wallet information using the Moralis Web3 Data API. 
+                        Access detailed information about wallet transactions, balances, and more.
+                    </p>
+                </section>
+
+                <!-- Example Wallet -->
+                <section class="mb-8 p-4 bg-blue-50 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-2">Example Wallet Address</h3>
+                    <code class="bg-white p-2 rounded text-sm">0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326</code>
+                    <p class="mt-2 text-sm text-gray-600">You can use this example wallet address to test the API endpoints.</p>
+                </section>
+
+                <!-- Endpoints -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold mb-6">API Endpoints</h2>
+                    <div class="grid gap-6">
+                        <% endpoints.forEach(endpoint => { %>
+                            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center">
+                                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">GET</span>
+                                        <code class="ml-4 text-purple-600 font-mono"><%= endpoint.path %></code>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700"><%= endpoint.description %></p>
+
+                                <!-- Try It Out Section for Each Endpoint -->
+                                <div class="mt-4">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="walletAddress_<%= endpoint.path.replace(/\//g, '_') %>">
+                                        Wallet Address
+                                    </label>
+                                    <input type="text" 
+                                           id="walletAddress_<%= endpoint.path.replace(/\//g, '_') %>" 
+                                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                           placeholder="Enter wallet address (e.g., 0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326)">
+                                    <div class="flex gap-4 mt-2">
+                                        <button onclick="makeRequest('<%= endpoint.path %>', 'walletAddress_<%= endpoint.path.replace(/\//g, '_') %>')" 
+                                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                                            Send Request
+                                        </button>
+                                        <button onclick="clearResponse('walletAddress_<%= endpoint.path.replace(/\//g, '_') %>')" 
+                                                class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                                            Clear
+                                        </button>
+                                    </div>
+                                    <div id="loading_<%= endpoint.path.replace(/\//g, '_') %>" class="mt-2 hidden">
+                                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <button onclick="toggleResponse('response_<%= endpoint.path.replace(/\//g, '_') %>')" 
+                                                class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
+                                            Toggle Response
+                                        </button>
+                                        <div id="response_<%= endpoint.path.replace(/\//g, '_') %>" class="response-container mt-2 hidden">
+                                            <h4 class="font-bold mb-2">Response:</h4>
+                                            <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-gray-800 text-white py-8">
+                <div class="container mx-auto px-4">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">Moralis Wallet API</h3>
+                            <p class="text-gray-400">Built with ❤️ using Moralis</p>
+                        </div>
+                        <div>
+                            <a href="https://docs.moralis.com/web3-data-api/evm" 
+                               class="text-blue-400 hover:text-blue-300"
+                               target="_blank">
+                                Official Moralis Documentation →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+        <script>
+            let currentEndpoint = '';
+
+            function showExample(endpoint) {
+                currentEndpoint = endpoint;
+                document.getElementById('currentEndpoint').textContent = endpoint;
+                document.getElementById('tryItOut').classList.remove('hidden');
+                document.getElementById('response').classList.add('hidden');
+                document.getElementById('loading').classList.add('hidden'); 
+                document.getElementById('walletAddress').value = '';
+            }
+
+            function clearResponse(walletAddressId) {
+                document.getElementById(walletAddressId).value = ''; // Clear the wallet address input
+                const responseElement = document.getElementById(`response_${walletAddressId.split('_')[1]}`);
+                responseElement.classList.add('hidden'); // Hide the response
+                const loadingElement = document.getElementById(`loading_${walletAddressId.split('_')[1]}`);
+                loadingElement.classList.add('hidden'); // Hide the loading spinner
+            }
+
+            async function makeRequest(endpoint, addressId) {
+                const address = document.getElementById(addressId).value.trim();
+                if (!address) {
+                    alert('Please enter a wallet address');
+                    return;
+                }
+
+                if (!address.match(/^0x[a-fA-F0-9]{40}$/)) {
+                    alert('Please enter a valid Ethereum wallet address');
+                    return;
+                }
+
+                const endpointUrl = endpoint.replace(':address', address);
+                const loadingElement = document.getElementById(`loading_${endpoint.replace(/\//g, '_')}`);
+                const responseElement = document.getElementById(`response_${endpoint.replace(/\//g, '_')}`);
+
+                try {
+                    // Show loading spinner
+                    loadingElement.classList.remove('hidden');
+                    responseElement.classList.add('hidden');
+
+                    const response = await fetch(endpointUrl);
+                    const data = await response.json();
+
+                    // Hide loading spinner and show response
+                    loadingElement.classList.add('hidden');
+                    responseElement.classList.remove('hidden');
+                    responseElement.querySelector('pre').textContent = JSON.stringify(data, null, 2);
+                    Prism.highlightAll();
+                } catch (error) {
+                    loadingElement.classList.add('hidden');
+                    responseElement.classList.remove('hidden');
+                    responseElement.querySelector('pre').textContent = `Error: ${error.message}`;
+                }
+            }
+
+            function toggleResponse(responseId) {
+                const responseElement = document.getElementById(responseId);
+                responseElement.classList.toggle('hidden');
+            }
+
+            // Add keyboard shortcut for sending request
+            document.getElementById('walletAddress').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    makeRequest(currentEndpoint, 'walletAddress_' + currentEndpoint.replace(/\//g, '_'));
+                }
+            });
+        </script>
+    </body>
+    </html>
