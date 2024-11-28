@@ -29,6 +29,7 @@ To set up the project locally, follow these steps:
 
 2. **Install dependencies**:
    ```bash
+   yarn add moralis express @moralisweb3/common-evm-utils
    yarn install
    ```
 
