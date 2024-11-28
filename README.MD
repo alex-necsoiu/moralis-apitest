@@ -22,7 +22,7 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/moralis-wallet-api-docs.git
+   git clone https://github.com/alex-necsoiu/moralis-apitest.git
    cd moralis-wallet-api-docs
    ```
 
@@ -32,7 +32,13 @@ To set up the project locally, follow these steps:
    ```
 
 3. **Set up environment variables**:
-   Create a `.env` file in the root directory and add your configuration settings (if applicable).
+   Create a `.env` file in the root directory and add the following configuration settings:
+   ```
+   MORALIS_API_KEY=your_api_key_here
+   PORT=3000
+   CHAIN_ID=eth
+   ```
+   Make sure to replace `your_api_key_here` with your actual Moralis API key.
 
 4. **Start the server**:
    ```bash
@@ -76,3 +82,18 @@ Contributions are welcome! Please follow these steps:
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## MIT License
+
+MIT License
+
+Copyright (c) [year] [your name]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+...
