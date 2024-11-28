@@ -13,6 +13,7 @@ This project provides a web interface for the Moralis Wallet API, allowing users
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
+- [Architecture](#architecture)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -36,7 +37,7 @@ To set up the project locally, follow these steps:
    ```
    MORALIS_API_KEY=your_api_key_here
    PORT=3000
-   CHAIN_ID=eth
+   CHAIN_ID=1
    ```
    Make sure to replace `your_api_key_here` with your actual Moralis API key.
 
@@ -68,6 +69,39 @@ The following API endpoints are available:
 - **GET** `/api/wallet/:address/defi-positions`: Get wallet DeFi positions
 - **GET** `/api/wallet/:address/pnl`: Get wallet profit and loss
 - **GET** `/api/wallet/:address/domains`: Get wallet domains
+
+## Architecture
+
+I've created a clean and maintainable architecture for the Moralis API integration. Here's a breakdown of the structure:
+
+- **Config Layer (config/config.js)**:
+  - Manages environment variables and configuration settings
+  - Centralizes API keys and other constants
+
+- **HTTP Client (utils/httpClient.js)**:
+  - Generic HTTP client using Axios
+  - Handles requests and error responses
+  - Supports all HTTP methods with consistent error handling
+
+- **Service Layer (services/moralisService.js)**:
+  - Implements all Moralis API functionalities
+  - Encapsulates Moralis-specific logic
+  - Provides clean interfaces for wallet operations
+
+- **Controller Layer (controllers/walletController.js)**:
+  - Handles HTTP request/response logic
+  - Manages error handling for API endpoints
+  - Coordinates between routes and services
+
+- **Routes (routes/walletRoutes.js)**:
+  - Defines API endpoints
+  - Maps routes to controller methods
+  - Organizes related endpoints together
+
+- **Entry Point (index.js)**:
+  - Sets up Express server
+  - Configures middleware
+  - Handles global error handling
 
 ## Contributing
 
