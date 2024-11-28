@@ -1,5 +1,9 @@
 # Moralis Wallet API Documentation
 
+## Introduction
+
+This tutorial will teach you how to set up a server-side dapp that can query blockchain data, such as NFTs, tokens, balances, transfers, transactions, etc., from any NodeJS application. This tutorial dapp works on almost any blockchain, including Ethereum, Polygon, BNB Chain, Avalanche, Cronos, and many more!
+
 This project provides a web interface for the Moralis Wallet API, allowing users to retrieve comprehensive wallet information using various API endpoints.
 
 ## Features
@@ -97,12 +101,6 @@ I've created a clean and maintainable architecture for the Moralis API integrati
 - **Routes (routes/walletRoutes.js)**:
   - Defines API endpoints
   - Maps routes to controller methods
-  - Organizes related endpoints together
-
-- **Entry Point (index.js)**:
-  - Sets up Express server
-  - Configures middleware
-  - Handles global error handling
 
 ## Contributing
 
