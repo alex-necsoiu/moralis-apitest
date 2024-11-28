@@ -18,6 +18,34 @@ This project provides a web interface for the Moralis Wallet API, enabling users
 - [Contributing](#contributing)
 - [License](#license)
 
+## Architecture
+
+Clean and maintainable architecture for the Moralis API integration. Here's a breakdown of the structure:
+
+- **Config Layer (config/config.js)**:
+  - Manages environment variables and configuration settings
+  - Centralizes API keys and other constants
+
+- **HTTP Client (utils/httpClient.js)**:
+  - Generic HTTP client using Axios
+  - Handles requests and error responses
+  - Supports all HTTP methods with consistent error handling
+
+- **Service Layer (services/moralisService.js)**:
+  - Implements all Moralis API functionalities
+  - Encapsulates Moralis-specific logic
+  - Provides clean interfaces for wallet operations
+
+- **Controller Layer (controllers/walletController.js)**:
+  - Handles HTTP request/response logic
+  - Manages error handling for API endpoints
+  - Coordinates between routes and services
+
+- **Routes (routes/walletRoutes.js)**:
+  - Defines API endpoints
+  - Maps routes to controller methods
+
+
 ## Installation
 
 To set up the project locally, follow these steps:
@@ -50,34 +78,6 @@ To set up the project locally, follow these steps:
 
 5. **Open your browser**:
    Navigate to `http://localhost:3000` (replace `PORT` with the port number specified in your configuration).
-
-
-## Architecture
-
-I've created a clean and maintainable architecture for the Moralis API integration. Here's a breakdown of the structure:
-
-- **Config Layer (config/config.js)**:
-  - Manages environment variables and configuration settings
-  - Centralizes API keys and other constants
-
-- **HTTP Client (utils/httpClient.js)**:
-  - Generic HTTP client using Axios
-  - Handles requests and error responses
-  - Supports all HTTP methods with consistent error handling
-
-- **Service Layer (services/moralisService.js)**:
-  - Implements all Moralis API functionalities
-  - Encapsulates Moralis-specific logic
-  - Provides clean interfaces for wallet operations
-
-- **Controller Layer (controllers/walletController.js)**:
-  - Handles HTTP request/response logic
-  - Manages error handling for API endpoints
-  - Coordinates between routes and services
-
-- **Routes (routes/walletRoutes.js)**:
-  - Defines API endpoints
-  - Maps routes to controller methods
 
 
 ## Usage
